@@ -19,6 +19,14 @@ type UsersList struct {
 	CreatedAt string `json:"created_at"`
 }
 
+type UserInfo struct {
+	UserId    int    `json:"user_id"`
+	UserName  string `json:"user_name"`
+	UserEmail string `json:"user_email"`
+	UserPass  string `json:"user_pass"`
+	CreatedAt string `json:"created_at"`
+}
+
 type UserRegisterData struct {
 	UserName  string `json:"user_name"`
 	UserEmail string `json:"user_email"`
@@ -89,11 +97,11 @@ func (u *Users) List(id string) ([]UsersList, error) {
 	return users, nil
 }
 
-func (u *Users) ByEmail(email string) (UsersList, error) {
-	var user UsersList
+func (u *Users) ByEmail(email string) (UserInfo, error) {
+	var user UserInfo
 
 	rows, rowsErr := u.db.Query(
-		`SELECT user.user_id, user.user_name, user.user_email, user.created_at
+		`SELECT user.user_id, user.user_name, user.user_email, user.user_pass, user.created_at
         FROM user
         WHERE user.deleted_at IS NULL AND user_email = ?`, email,
 	)
@@ -115,6 +123,7 @@ func (u *Users) ByEmail(email string) (UsersList, error) {
 			&user.UserId,
 			&user.UserName,
 			&user.UserEmail,
+			&user.UserPass,
 			&user.CreatedAt,
 		)
 
