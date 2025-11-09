@@ -64,3 +64,87 @@ user_id=1
 	]
 }
 ```
+
+## Register a new User
+
+> `POST` /users/register
+
+### Request
+
+```json
+{
+	"user_name": "Usuário2",
+	"user_email": "usuario2@usuario.com",
+	"user_pass": "Usuario2"
+}
+```
+
+### Response
+
+```json
+{
+	"resource": {
+		"ok": true,
+		"error": ""
+	},
+	"user": {
+		"user_id": 4,
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjI3MzA2MTgsImlhdCI6MTc2MjcyOTcxOH0.82riiYls98h3LQHfjE07sOecSr542Opzx_9WqjZaji0"
+	}
+}
+```
+
+## Log in a User
+
+> `POST` /users/login
+
+### Request
+
+```json
+{
+	"user_email": "usuario2@usuario.com",
+	"user_pass": "Usuario2"
+}
+```
+
+### Response
+
+```json
+{
+	"resource": {
+		"ok": true,
+		"error": ""
+	},
+	"user": {
+		"user_id": 4,
+		"user_name": "Usuário2",
+		"user_email": "usuario2@usuario.com",
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjI3MzE4OTYsImlhdCI6MTc2MjczMDk5Nn0.RYKtwMEt3J9z9v_bwu3mC6Loy_YiduuGm65gxahj44w"
+	}
+}
+```
+
+## Refresh login with `refresh_token`
+
+> `GET` /users/refresh
+
+### Headers
+
+In Headers, must be `refresh_token` header with a valid refresh token generated previously with API.
+
+### Response
+
+```json
+{
+	"resource": {
+		"ok": true,
+		"error": ""
+	},
+	"user": {
+		"user_id": 4,
+		"user_name": "Usuário2",
+		"user_email": "usuario2@usuario.com",
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjI3MzE5MTEsImlhdCI6MTc2MjczMTAxMX0.PsEYIPBMfz4KiH_5TiO-sBZrj-kfdzp4PEai3-Srx0o"
+	}
+}
+```
