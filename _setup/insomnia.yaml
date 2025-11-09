@@ -1,0 +1,116 @@
+type: collection.insomnia.rest/5.0
+name: Synk
+meta:
+  id: wrk_17322b952bb24e84b4c93de25186bd21
+  created: 1758844512926
+  modified: 1758844512926
+  description: ""
+collection:
+  - name: posts
+    meta:
+      id: fld_b7de9c95160645fcae32d24f28cc6296
+      created: 1758844562640
+      modified: 1758844562640
+      sortKey: -1758844562640
+      description: ""
+  - name: templates
+    meta:
+      id: fld_783dea9419484384816e8fb19830b2f0
+      created: 1760051795472
+      modified: 1760051795472
+      sortKey: -1744550419801
+      description: ""
+  - name: integration_profiles
+    meta:
+      id: fld_a1a9bcfe1a9e47af8d0e2a9aa8aa1e2a
+      created: 1760137048704
+      modified: 1760137048704
+      sortKey: -1737403348381.5
+      description: ""
+  - name: integration_credentials
+    meta:
+      id: fld_05dd95472403410aa251967192aee429
+      created: 1761507118347
+      modified: 1761507120727
+      sortKey: -1733829812671.75
+      description: ""
+  - name: auth
+    meta:
+      id: fld_ed98952020a1455bbaea26206185ca53
+      created: 1762646232048
+      modified: 1762646675914
+      sortKey: -1762646232048
+      description: ""
+    children:
+      - url: "{{auth_url}}/about"
+        name: about
+        meta:
+          id: req_1ad89fe1ce5a4909b9e78be1839c88fe
+          created: 1762646508560
+          modified: 1762646527453
+          isPrivate: false
+          description: ""
+          sortKey: -1762646508560
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - name: users
+        meta:
+          id: fld_23805e95e5f640608a3394845a9186db
+          created: 1762648242203
+          modified: 1762648242203
+          sortKey: -1762648242203
+          description: ""
+        children:
+          - url: "{{auth_url}}/users"
+            name: show
+            meta:
+              id: req_920f078363eb4d09931e03ac8b5ae03e
+              created: 1762648247052
+              modified: 1762648537254
+              isPrivate: false
+              description: ""
+              sortKey: -1762648247052
+            method: GET
+            parameters:
+              - id: pair_261ef9419a864767ba874249e28d9bb8
+                name: user_id
+                value: "1"
+                description: ""
+                disabled: false
+            headers:
+              - name: User-Agent
+                value: insomnia/12.0.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d382f5fd896d4cafe9c9a8b639043d99a4bdf9cf
+    created: 1758844512931
+    modified: 1758844512931
+environments:
+  name: Base Environment
+  meta:
+    id: env_d382f5fd896d4cafe9c9a8b639043d99a4bdf9cf
+    created: 1758844512928
+    modified: 1762646183942
+    isPrivate: false
+  data:
+    base_url: http://localhost:8082
+    auth_url: http://localhost:8083
