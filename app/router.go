@@ -13,6 +13,7 @@ func Router(service *Service) {
 
 	http.HandleFunc("GET /about", aboutController.HandleAbout)
 	http.HandleFunc("GET /users", userController.HandleShow)
+	http.HandleFunc("POST /users/register", userController.HandleRegister)
 
 	util.Log("app running on port 8080 to " + os.Getenv("PORT"))
 
