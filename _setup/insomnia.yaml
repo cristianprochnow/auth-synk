@@ -98,12 +98,105 @@ collection:
                 send: true
                 store: true
               rebuildPath: true
+          - url: "{{auth_url}}/users/register"
+            name: register
+            meta:
+              id: req_a8e0ecaf5e814e5cba92a03ccb541587
+              created: 1762728250426
+              modified: 1762729716126
+              isPrivate: false
+              description: ""
+              sortKey: -1762728250426
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"user_name": "Usuário2",
+                	"user_email": "usuario2@usuario.com",
+                	"user_pass": "Usuario2"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/12.0.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{auth_url}}/users/login"
+            name: login
+            meta:
+              id: req_a659dca0e76449bfa585e3c00dda578d
+              created: 1762729728032
+              modified: 1762729746140
+              isPrivate: false
+              description: ""
+              sortKey: -1762688248739
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"user_email": "usuario2@usuario.com",
+                	"user_pass": "Usuario2"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/12.0.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{auth_url}}/users/refresh"
+            name: refresh
+            meta:
+              id: req_3be246fb58e0490bb2994dd67906046b
+              created: 1762730969882
+              modified: 1762730990500
+              isPrivate: false
+              description: ""
+              sortKey: -1762668247895.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/12.0.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_d382f5fd896d4cafe9c9a8b639043d99a4bdf9cf
     created: 1758844512931
-    modified: 1758844512931
+    modified: 1762731011384
+  cookies:
+    - key: refresh_token
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjMzMzU4MTEsImlhdCI6MTc2MjczMTAxMX0.MMt54uYdVc0HBFHz0Op_2tvIFV5CEkJHQeuChQ5mGqk
+      maxAge: 604800
+      domain: localhost
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-11-09T23:29:56.585Z
+      lastAccessed: 2025-11-09T23:30:11.384Z
+      id: 97cea1d6-01f9-42eb-90ab-5b515b7f1735
 environments:
   name: Base Environment
   meta:
