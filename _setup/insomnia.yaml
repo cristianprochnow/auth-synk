@@ -180,23 +180,48 @@ collection:
                 send: true
                 store: true
               rebuildPath: true
+          - url: "{{auth_url}}/users/check"
+            name: check
+            meta:
+              id: req_c67b320dd2c34c3890f141cea1fd9b22
+              created: 1762899117680
+              modified: 1762899700675
+              isPrivate: false
+              description: ""
+              sortKey: -1762658247473.75
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/12.0.0
+                id: pair_e42c70adb51c41ad81a992a2765816c6
+            authentication:
+              type: bearer
+              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjI5MDA1OTEsImlhdCI6MTc2Mjg5OTY5MX0.Uuft3FMvFH_CinK9YSwa-ofa-ZxA159Q-XeP6LukYxE
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_d382f5fd896d4cafe9c9a8b639043d99a4bdf9cf
     created: 1758844512931
-    modified: 1762731011384
+    modified: 1762899691851
   cookies:
     - key: refresh_token
-      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjMzMzU4MTEsImlhdCI6MTc2MjczMTAxMX0.MMt54uYdVc0HBFHz0Op_2tvIFV5CEkJHQeuChQ5mGqk
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOjR9LCJleHAiOjE3NjM1MDQ0OTEsImlhdCI6MTc2Mjg5OTY5MX0.LojkAa5fSXHrkisxyv3xYBx6b9BuKCHns3_HCCL99j8
       maxAge: 604800
       domain: localhost
       path: /
       httpOnly: true
       hostOnly: true
       creation: 2025-11-09T23:29:56.585Z
-      lastAccessed: 2025-11-09T23:30:11.384Z
-      id: 97cea1d6-01f9-42eb-90ab-5b515b7f1735
+      lastAccessed: 2025-11-11T22:21:31.851Z
+      id: 53298eb9-337a-400b-82d9-27713e0300b2
 environments:
   name: Base Environment
   meta:
