@@ -148,3 +148,22 @@ In Headers, must be `refresh_token` header with a valid refresh token generated 
 	}
 }
 ```
+
+## Check if `access_token` is valid
+
+> `GET` /users/check
+### Headers
+
+```
+Authorization: Bearer eyJhbGciOiJIUzI1NiI...
+```
+### Response
+
+```json
+{
+	"resource": {
+		"ok": true,
+		"error": ""
+	}
+}
+```

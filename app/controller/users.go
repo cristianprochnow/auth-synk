@@ -39,6 +39,10 @@ type HandleUserLoginResponse struct {
 	Data     UserLoginDataResponse `json:"user"`
 }
 
+type HandleUserCheckResponse struct {
+	Resource ResponseHeader `json:"resource"`
+}
+
 type UserLoginDataResponse struct {
 	UserId    int    `json:"user_id"`
 	UserName  string `json:"user_name"`
@@ -616,5 +620,92 @@ func (u *Users) HandleRefresh(w http.ResponseWriter, r *http.Request) {
 	response.Data.Token = accessTokenString
 
 	http.SetCookie(w, &cookie)
+	WriteSuccessResponse(w, response)
+}
+
+func (u *Users) HandleCheck(w http.ResponseWriter, r *http.Request) {
+	authHeader := r.Header.Get("Authorization")
+
+	response := HandleUserCheckResponse{
+		Resource: ResponseHeader{
+			Ok: true,
+		},
+	}
+
+	if authHeader == "" {
+		response.Resource.Ok = false
+		response.Resource.Error = "Bearer Authorization header is required"
+
+		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusBadRequest)
+
+		return
+	}
+
+	parts := strings.Split(authHeader, " ")
+
+	if len(parts) != 2 || strings.ToLower(parts[0]) != "bearer" {
+		response.Resource.Ok = false
+		response.Resource.Error = "invalid Bearer Authorization header format"
+
+		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusBadRequest)
+
+		return
+	}
+
+	tokenString := parts[1]
+
+	if tokenString == "" {
+		response.Resource.Ok = false
+		response.Resource.Error = "Bearer token can not be empty"
+
+		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusBadRequest)
+
+		return
+	}
+
+	secret := os.Getenv("JWT_SECRET")
+	if secret == "" {
+		response.Resource.Ok = false
+		response.Resource.Error = "JWT secret is not set"
+
+		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusBadRequest)
+
+		return
+	}
+	jwtSecret := []byte(secret)
+
+	claims := &AccessTokenClaims{}
+	token, tokenErr := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("unexpected signing method")
+		}
+
+		return jwtSecret, nil
+	})
+
+	if tokenErr != nil || !token.Valid {
+		response.Resource.Ok = false
+		response.Resource.Error = "access token is not valid"
+
+		if errors.Is(tokenErr, jwt.ErrTokenExpired) {
+			response.Resource.Error = "access token has expired"
+		}
+
+		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusUnauthorized)
+
+		return
+	}
+
+	userInfo, userInfoErr := u.model.ById(claims.User.UserId)
+
+	if userInfo.UserId == 0 || userInfoErr != nil {
+		response.Resource.Ok = false
+		response.Resource.Error = "invalid user supplied by access_token"
+
+		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusUnauthorized)
+
+		return
+	}
+
 	WriteSuccessResponse(w, response)
 }
