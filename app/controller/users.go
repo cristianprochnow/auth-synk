@@ -687,6 +687,10 @@ func (u *Users) HandleCheck(w http.ResponseWriter, r *http.Request) {
 		response.Resource.Ok = false
 		response.Resource.Error = "access token is not valid"
 
+		if errors.Is(tokenErr, jwt.ErrTokenExpired) {
+			response.Resource.Error = "access token has expired"
+		}
+
 		WriteErrorResponse(w, response, "/users", response.Resource.Error, http.StatusUnauthorized)
 
 		return
