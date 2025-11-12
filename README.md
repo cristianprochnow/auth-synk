@@ -167,3 +167,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiI...
 	}
 }
 ```
+
+## Log out an User
+
+> `GET` /users/logout
+### Response
+
+```json
+{
+	"resource": {
+		"ok": true,
+		"error": ""
+	}
+}
+```

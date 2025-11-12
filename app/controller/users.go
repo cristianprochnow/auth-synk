@@ -709,3 +709,26 @@ func (u *Users) HandleCheck(w http.ResponseWriter, r *http.Request) {
 
 	WriteSuccessResponse(w, response)
 }
+
+func (u *Users) HandleLogout(w http.ResponseWriter, r *http.Request) {
+	SetJsonContentType(w)
+
+	response := HandleUserCheckResponse{
+		Resource: ResponseHeader{
+			Ok: true,
+		},
+	}
+
+	cookie := http.Cookie{
+		Name:     "refresh_token",
+		Value:    "",
+		MaxAge:   -1,
+		Path:     "/",
+		Domain:   "",
+		HttpOnly: true,
+		Secure:   false, // Set to true in production (requires HTTPS)
+	}
+
+	http.SetCookie(w, &cookie)
+	WriteSuccessResponse(w, response)
+}
